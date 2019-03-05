@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Frogger</title>
+	</head>
+	<canvas id="gCanvas" width="600" height="600"></canvas>
+
+
+	<script>
+
+		var gCanvas = document.getElementById("gCanvas");
+
+		var ctx = gCanvas.getContext("2d");
+
+		const canvasFillColor = 'white';
+		const canvasStrokeColor = 'black';
+
+		ctx.fillStyle='canvasFillColor';
+		ctx.strokeStyle='canvasStrokeColor';
+
+		const width = gCanvas.width;
+		const height = gCanvas.height;
+
+		// fill out border of canvas
+		ctx.strokeRect(0, 0, width, height);
+
+		let dx = 10; // initial speed
+
+		// create frog
+		const frogHeight = 30;
+		const frogWidth = 30;
+		var frogX = Math.floor((width/2) - (frogWidth/2));
+		var frogY = height - frogHeight;
+
+
+		drawFrog();
+
+		document.addEventListener("keydown", move);
+
+
+		function drawFrog(){
+			ctx.fillStyle='lightgreen';
+
+			ctx.fillRect(frogX, frogY, frogWidth, frogHeight);
+		}
+
+		function clearCanvas(){
+			ctx.fillStyle='white';
+
+			ctx.fillRect(0,0,width,height);
+			ctx.strokeRect(0, 0, width, height);
+		}
+		function move(event) {
+			// set key codes
+			const LEFT = 37;
+			const UP = 38;
+			const RIGHT = 39;
+			const DOWN = 40;
+
+			const key = event.keyCode;
+
+			if(key == LEFT && frogX > 0){
+				frogX -= 10;
+			}
+			else if(key == RIGHT && frogX < (width-frogWidth)){
+				frogX += 10;
+			}
+			else if(key == UP && frogY > 0){
+				frogY -= 10;
+			}
+			else if(key == DOWN && frogY < (height-frogHeight)){
+				frogY += 10;
+			}
+
+			clearCanvas();
+			drawFrog();
+		}
+
+
+
+		// TODO: create 'enemy' boxes 
+
+
+
+	</script>
+</html>
