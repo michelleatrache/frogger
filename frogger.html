@@ -36,7 +36,7 @@
 		var frogY = height - frogHeight;
 
 
-		drawFrog();
+		main();
 
 		document.addEventListener("keydown", move);
 
@@ -101,6 +101,14 @@
 			drawFrog();
 		}
 
+		function main() {
+			setTimeout(function onStep() {
+				clearCanvas();
+				drawFrog();
+
+				main();
+			}, 100)
+		}
 
 
 		// TODO: create 'enemy' boxes 
