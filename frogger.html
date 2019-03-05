@@ -35,6 +35,16 @@
 		var frogX = Math.floor((width/2) - (frogWidth/2));
 		var frogY = height - frogHeight;
 
+		const row1Width = 100;
+		const row1Height = 50;
+		var row1dx = 20; // speed of row1
+
+		// create row 1 objects
+		let row1Boxes = [
+			{x: 150, y: 450},
+			{x: 400, y: 450},
+		];		
+
 
 		main();
 
@@ -101,10 +111,22 @@
 			drawFrog();
 		}
 
+
+		function drawRow1() {
+			ctx.fillStyle = 'blue'
+
+			ctx.fillRect(row1Boxes[0].x += row1dx, row1Boxes[0].y, row1Width, row1Height);
+			ctx.fillRect(row1Boxes[1].x += row1dx, row1Boxes[1].y, row1Width, row1Height);
+
+
+		}	
+
 		function main() {
 			setTimeout(function onStep() {
 				clearCanvas();
 				drawFrog();
+
+				drawRow1();
 
 				main();
 			}, 100)
