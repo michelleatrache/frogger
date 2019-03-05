@@ -3,6 +3,7 @@
 	<head>
 		<title>Frogger</title>
 	</head>
+	<div id="score">0</div>
 	<canvas id="gCanvas" width="600" height="600"></canvas>
 
 
@@ -26,6 +27,8 @@
 
 		let dx = 10; // initial speed
 
+		let score = 0;
+
 		// create frog
 		const frogHeight = 30;
 		const frogWidth = 30;
@@ -37,6 +40,19 @@
 
 		document.addEventListener("keydown", move);
 
+		function resetFrogPosition() { 
+			frogX = Math.floor((width/2) - (frogWidth/2));
+			frogY = height - frogHeight;
+
+			clearCanvas();
+			drawFrog();
+
+		}
+
+		function incrementScore(){
+			score++;
+			document.getElementById('score').innerHTML = score;
+		}
 
 		function drawFrog(){
 			ctx.fillStyle='lightgreen';
@@ -50,6 +66,8 @@
 			ctx.fillRect(0,0,width,height);
 			ctx.strokeRect(0, 0, width, height);
 		}
+
+
 		function move(event) {
 			// set key codes
 			const LEFT = 37;
@@ -70,6 +88,13 @@
 			}
 			else if(key == DOWN && frogY < (height-frogHeight)){
 				frogY += 10;
+			}
+
+			if(frogY <= 0){
+				// then we reached the end
+				incrementScore();
+
+				resetFrogPosition();
 			}
 
 			clearCanvas();
