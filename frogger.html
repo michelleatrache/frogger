@@ -25,8 +25,6 @@
 		// fill out border of canvas
 		ctx.strokeRect(0, 0, width, height);
 
-		let dx = 10; // initial speed
-
 		let score = 0;
 
 		// create frog
@@ -37,14 +35,23 @@
 
 		const row1Width = 100;
 		const row1Height = 50;
-		var row1dx = 20; // speed of row1
+		var row1dx = 5; // speed of row1
+
+		const row2Width = 80;
+		const row2Height = 50;
+		var row2dx = 10; // speed of row2
 
 		// create row 1 objects
 		let row1Boxes = [
-			{x: 150, y: 450},
+			{x: 50, y: 450},
 			{x: 400, y: 450},
 		];		
 
+		let row2Boxes = [
+			{x: 20, y: 350},
+			{x: 230, y: 350},
+			{x: 450, y: 350},
+		];
 
 		main();
 
@@ -88,16 +95,16 @@
 			const key = event.keyCode;
 
 			if(key == LEFT && frogX > 0){
-				frogX -= 10;
+				frogX -= 20;
 			}
 			else if(key == RIGHT && frogX < (width-frogWidth)){
-				frogX += 10;
+				frogX += 20;
 			}
 			else if(key == UP && frogY > 0){
-				frogY -= 10;
+				frogY -= 20;
 			}
 			else if(key == DOWN && frogY < (height-frogHeight)){
-				frogY += 10;
+				frogY += 20;
 			}
 
 			if(frogY <= 0){
@@ -118,18 +125,44 @@
 			ctx.fillRect(row1Boxes[0].x += row1dx, row1Boxes[0].y, row1Width, row1Height);
 			ctx.fillRect(row1Boxes[1].x += row1dx, row1Boxes[1].y, row1Width, row1Height);
 
+			// TODO: Wrapping around the edges
+			if(row1Boxes[0].x > width){
+				row1Boxes[0].x = 0 - row1Width;
+			}
+			if(row1Boxes[1].x > width){
+				row1Boxes[1].x = 0- row1Width;
+			}
+		}
 
-		}	
+		function drawRow2() {
+			ctx.fillStyle = 'red'
+
+			ctx.fillRect(row2Boxes[0].x += row2dx, row2Boxes[0].y, row2Width, row2Height);
+			ctx.fillRect(row2Boxes[1].x += row2dx, row2Boxes[1].y, row2Width, row2Height);
+			ctx.fillRect(row2Boxes[2].x += row2dx, row2Boxes[2].y, row2Width, row2Height);
+
+			// TODO: Wrapping around the edges
+			if(row2Boxes[0].x > width){
+				row2Boxes[0].x = 0 - row2Width;
+			}
+			if(row2Boxes[1].x > width){
+				row2Boxes[1].x = 0 - row2Width;
+			}
+			if(row2Boxes[2].x > width){
+				row2Boxes[2].x = 0 - row2Width;
+			}
+		}
+
 
 		function main() {
 			setTimeout(function onStep() {
 				clearCanvas();
 				drawFrog();
-
 				drawRow1();
+				drawRow2();
 
 				main();
-			}, 100)
+			}, 50)
 		}
 
 
