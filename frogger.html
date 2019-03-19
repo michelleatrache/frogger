@@ -39,7 +39,7 @@
 
 		const row2Width = 80;
 		const row2Height = 50;
-		var row2dx = 10; // speed of row2
+		var row2dx = -10; // speed of row2
 
 		// create row 1 objects
 		let row1Boxes = [
@@ -142,14 +142,14 @@
 			ctx.fillRect(row2Boxes[2].x += row2dx, row2Boxes[2].y, row2Width, row2Height);
 
 			// TODO: Wrapping around the edges
-			if(row2Boxes[0].x > width){
-				row2Boxes[0].x = 0 - row2Width;
+			if(row2Boxes[0].x < 0){
+				row2Boxes[0].x = width + row2Height;
 			}
-			if(row2Boxes[1].x > width){
-				row2Boxes[1].x = 0 - row2Width;
+			if(row2Boxes[1].x < 0){
+				row2Boxes[1].x = width + row2Width;
 			}
-			if(row2Boxes[2].x > width){
-				row2Boxes[2].x = 0 - row2Width;
+			if(row2Boxes[2].x < 0){
+				row2Boxes[2].x = width + row2Width;
 			}
 		}
 
