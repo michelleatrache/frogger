@@ -35,11 +35,15 @@
 
 		const row1Width = 100;
 		const row1Height = 50;
-		var row1dx = 5; // speed of row1
+		var row1dx = 2; // speed of row1
 
 		const row2Width = 80;
 		const row2Height = 50;
-		var row2dx = -10; // speed of row2
+		var row2dx = -3; // speed of row2
+
+		const row3Width = 30;
+		const row3Height = 50;
+		var row3dx = 4; // speed of row3
 
 		// create row 1 objects
 		let row1Boxes = [
@@ -51,6 +55,13 @@
 			{x: 20, y: 180},
 			{x: 230, y: 180},
 			{x: 450, y: 180},
+		];
+
+		let row3Boxes = [
+			{x: 30, y: 60},
+			{x: 200, y: 60},
+			{x: 380, y: 60},
+			{x: 530, y: 60},		
 		];
 
 		main();
@@ -122,35 +133,36 @@
 		function drawRow1() {
 			ctx.fillStyle = 'blue'
 
-			ctx.fillRect(row1Boxes[0].x += row1dx, row1Boxes[0].y, row1Width, row1Height);
-			ctx.fillRect(row1Boxes[1].x += row1dx, row1Boxes[1].y, row1Width, row1Height);
-
-			// TODO: Wrapping around the edges
-			if(row1Boxes[0].x > width){
-				row1Boxes[0].x = 0 - row1Width;
-			}
-			if(row1Boxes[1].x > width){
-				row1Boxes[1].x = 0- row1Width;
-			}
+			for (var i = 0; i < row1Boxes.length; i++) {
+				ctx.fillRect(row1Boxes[i].x += row1dx, row1Boxes[i].y, row1Width, row1Height);
+				if(row1Boxes[i].x > width){
+					row1Boxes[i].x = 0 - row1Width;
+				}			
+			};
 		}
 
 		function drawRow2() {
 			ctx.fillStyle = 'red'
 
-			ctx.fillRect(row2Boxes[0].x += row2dx, row2Boxes[0].y, row2Width, row2Height);
-			ctx.fillRect(row2Boxes[1].x += row2dx, row2Boxes[1].y, row2Width, row2Height);
-			ctx.fillRect(row2Boxes[2].x += row2dx, row2Boxes[2].y, row2Width, row2Height);
+			for (var i = 0; i < row2Boxes.length; i++) {
+				ctx.fillRect(row2Boxes[i].x += row2dx, row2Boxes[i].y, row2Width, row2Height);
+				if(row2Boxes[i].x < 0){
+					row2Boxes[i].x = width + row2Width;
+				}				
+			};
+		}
 
-			// TODO: Wrapping around the edges
-			if(row2Boxes[0].x < 0){
-				row2Boxes[0].x = width + row2Height;
-			}
-			if(row2Boxes[1].x < 0){
-				row2Boxes[1].x = width + row2Width;
-			}
-			if(row2Boxes[2].x < 0){
-				row2Boxes[2].x = width + row2Width;
-			}
+		function drawRow3(){
+			ctx.fillStyle = 'orange';
+
+			for (var i = 0; i < row3Boxes.length; i++) {
+				ctx.fillRect(row3Boxes[i].x += row3dx, row3Boxes[i].y, row3Width, row3Height);
+				if(row3Boxes[i].x > width){
+					row3Boxes[i].x = 0 - row3Width;
+				}					
+			};
+
+
 		}
 
 
@@ -160,14 +172,11 @@
 				drawFrog();
 				drawRow1();
 				drawRow2();
+				drawRow3();
 
 				main();
 			}, 50)
 		}
-
-
-		// TODO: create 'enemy' boxes 
-
 
 
 	</script>
